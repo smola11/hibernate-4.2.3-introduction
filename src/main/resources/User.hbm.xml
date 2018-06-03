@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.maciej.entity.User" table="USER">
+        <id name="id" type="java.lang.Long">
+            <column name="ID"/>
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME"/>
+        </property>
+        <property name="total" type="int">
+            <column name="TOTAL"/>
+        </property>
+        <property name="goal" type="int">
+            <column name="GOAL"/>
+        </property>
+    </class>
+</hibernate-mapping>

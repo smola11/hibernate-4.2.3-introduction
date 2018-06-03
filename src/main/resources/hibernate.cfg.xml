@@ -11,5 +11,6 @@
         <property name="hibernate.default_schema">protein_tracker</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.show_sql">true</property>
+        <mapping resource="User.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
