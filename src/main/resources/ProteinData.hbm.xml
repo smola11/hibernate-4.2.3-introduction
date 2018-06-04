@@ -5,11 +5,9 @@
     <class name="com.maciej.entity.ProteinData" table="PROTEIN_DATA">
         <id name="id" type="java.lang.Long">
             <column name="ID"/>
-            <generator class="foreign">
-                <param name="property">user</param>
-            </generator>
+            <generator class="increment"/>
         </id>
-        <one-to-one name="user" class="com.maciej.entity.User" constrained="true"/>
+        <one-to-one name="user" class="com.maciej.entity.User" property-ref="proteinData"/>
         <property name="total" type="int">
             <column name="TOTAL"/>
         </property>

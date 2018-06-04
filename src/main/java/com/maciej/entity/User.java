@@ -21,6 +21,8 @@ public class User {
     // We use interfaces like Set or List because hibernate will create own implementation;
     private List<UserHistory> history = new ArrayList<>();
 
+    private GoalAlert goalAlert;
+
 
     public void addHistory(UserHistory historyItem) {
         // bidirectional relationship
