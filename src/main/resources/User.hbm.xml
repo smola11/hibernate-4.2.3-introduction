@@ -10,7 +10,7 @@
         <property name="name" type="java.lang.String">
             <column name="NAME"/>
         </property>
-        <!--In such a way we do not have separate tales for ProteinData-->
+        <!--In such a way we do not have separate table for ProteinData-->
         <component name="proteinData">
             <property name="total" type="int">
                 <column name="TOTAL"/>
@@ -19,14 +19,14 @@
                 <column name="GOAL"/>
             </property>
         </component>
-        <set name="history" table="USER_HISTORY">
+        <!--inverse="true" - tell Hibernate that when it has User and UserHistory the relationships is bidirectional
+        so you only need to update USER_ID once-->
+        <!--cascade="save-update" - tell Hibernate every time you save User, save all the UserHistory too-->
+        <list name="history" table="USER_HISTORY" inverse="true" cascade="save-update">
             <!--foreign key which will be USER ID-->
-            <key column="ID"/>
-            <composite-element class="com.maciej.entity.UserHistory">
-                <property name="entryTime" type="date" column="ENTRY_TIME"/>
-                <property name="entry" type="string" column="ENTRY"/>
-
-            </composite-element>
-        </set>
+            <key column="USER_ID"/>
+            <list-index column="POSITION"/>
+            <one-to-many class="com.maciej.entity.UserHistory"/>
+        </list>
     </class>
 </hibernate-mapping>

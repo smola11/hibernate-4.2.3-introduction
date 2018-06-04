@@ -3,8 +3,8 @@ package com.maciej.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,5 +15,11 @@ public class User {
     private ProteinData proteinData = new ProteinData();
 
     // We use interfaces like Set or List because hibernate will create own implementation;
-    private Set<UserHistory> history = new HashSet<>();
+    private List<UserHistory> history = new ArrayList<>();
+
+    public void addHistory(UserHistory historyItem) {
+        // bidirectional relationship
+        historyItem.setUser(this);
+        history.add(historyItem);
+    }
 }
