@@ -20,7 +20,8 @@ public class Application {
         user.addHistory(new UserHistory(new Date(), "Set name to Joe"));
         user.getProteinData().setGoal(250);
         user.addHistory(new UserHistory(new Date(), "Set the goal to 250"));
-        user.setGoalAlert(new GoalAlert("Congratulations!"));
+        user.getGoalAlerts().add(new GoalAlert("Congratulations!"));
+        user.getGoalAlerts().add(new GoalAlert("You did it!"));
         session.save(user);
         session.getTransaction().commit();
 
