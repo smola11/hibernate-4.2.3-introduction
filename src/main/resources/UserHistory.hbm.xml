@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.maciej.entity.UserHistory" table="USERHISTORY">
+    <class name="com.maciej.entity.UserHistory" table="USER_HISTORY">
         <id name="id" type="java.lang.Long">
             <column name="ID" />
             <generator class="increment" />

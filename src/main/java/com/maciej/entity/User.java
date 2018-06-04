@@ -10,16 +10,26 @@ import java.util.List;
 @Setter
 public class User {
 
+    public User() {
+        setProteinData(new ProteinData());
+    }
+
     private Long id;
     private String name;
-    private ProteinData proteinData = new ProteinData();
+    private ProteinData proteinData;
 
     // We use interfaces like Set or List because hibernate will create own implementation;
     private List<UserHistory> history = new ArrayList<>();
+
 
     public void addHistory(UserHistory historyItem) {
         // bidirectional relationship
         historyItem.setUser(this);
         history.add(historyItem);
+    }
+
+    public void setProteinData(ProteinData proteinData) {
+        this.proteinData = proteinData;
+        proteinData.setUser(this);
     }
 }

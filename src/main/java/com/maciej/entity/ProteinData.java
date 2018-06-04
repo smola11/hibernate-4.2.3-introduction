@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class ProteinData {
 
+    private Long id;
     private int total;
     private int goal;
+    private User user;
 }

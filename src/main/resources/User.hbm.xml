@@ -10,15 +10,8 @@
         <property name="name" type="java.lang.String">
             <column name="NAME"/>
         </property>
-        <!--In such a way we do not have separate table for ProteinData-->
-        <component name="proteinData">
-            <property name="total" type="int">
-                <column name="TOTAL"/>
-            </property>
-            <property name="goal" type="int">
-                <column name="GOAL"/>
-            </property>
-        </component>
+        <one-to-one name="proteinData" class="com.maciej.entity.ProteinData" cascade="save-update"/>
+
         <!--inverse="true" - tell Hibernate that when it has User and UserHistory the relationships is bidirectional
         so you only need to update USER_ID once-->
         <!--cascade="save-update" - tell Hibernate every time you save User, save all the UserHistory too-->
