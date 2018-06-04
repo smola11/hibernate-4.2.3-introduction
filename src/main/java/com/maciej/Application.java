@@ -12,7 +12,7 @@ public class Application {
         session.beginTransaction();
         User user = new User();
         user.setName("Joe");
-        user.setGoal(250);
+        user.getProteinData().setGoal(250);
         session.save(user);
         session.getTransaction().commit();
 
@@ -20,9 +20,9 @@ public class Application {
         session.beginTransaction();
         User loadedUser = (User) session.get(User.class, 1L);
         System.out.println(loadedUser.getName());
-        System.out.println(loadedUser.getGoal());
+        System.out.println(loadedUser.getProteinData().getGoal());
         // Hibernate will do automatic update of User after changing using proxy
-        loadedUser.setTotal(loadedUser.getTotal() + 50);
+        loadedUser.getProteinData().setTotal(loadedUser.getProteinData().getTotal() + 50);
         session.getTransaction().commit();
 
         session.close();

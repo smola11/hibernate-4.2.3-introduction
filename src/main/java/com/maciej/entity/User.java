@@ -9,6 +9,5 @@ public class User {
 
     private Long id;
     private String name;
-    private int total;
-    private int goal;
+    private ProteinData proteinData = new ProteinData();
 }
