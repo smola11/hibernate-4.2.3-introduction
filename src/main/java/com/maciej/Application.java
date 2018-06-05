@@ -20,10 +20,14 @@ public class Application {
         session.beginTransaction();
 
         //NAMED QUERY
-        Query query =  session.getNamedQuery("AllGoalAlerts");
+        //Query query =  session.getNamedQuery("AllGoalAlerts");
 
 //        // PAGING
 //        Query query = session.createQuery("from GoalAlert").setFirstResult(2).setMaxResults(1);
+
+        // DYNAMIC INSTANTIATION
+        Query query = session.createQuery("select new com.maciej.dto.UserTotal(user.name, user.proteinData.total) " +
+        		"from User user");
         List<GoalAlert> alerts = query.list();
         for (GoalAlert alert : alerts) {
             System.out.println(alert.getMessage());
