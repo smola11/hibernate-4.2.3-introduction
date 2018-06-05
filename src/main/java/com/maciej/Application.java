@@ -4,6 +4,7 @@ import com.maciej.entity.GoalAlert;
 import com.maciej.entity.ProteinData;
 import com.maciej.entity.User;
 import com.maciej.entity.UserHistory;
+import net.sf.ehcache.hibernate.EhCache;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -40,6 +41,7 @@ public class Application {
         session.getTransaction().commit();
 
         HibernateUtilities.getSessionFactory().close();
+        
     }
 
     private static void PopulateSampleData() {
