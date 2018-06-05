@@ -1,5 +1,6 @@
 package com.maciej;
 
+import com.maciej.interceptors.AuditInterceptor;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -13,7 +14,7 @@ public class HibernateUtilities {
 
     static {
         try {
-            Configuration configuration = new Configuration().configure();
+            Configuration configuration = new Configuration().setInterceptor(new AuditInterceptor()).configure();
 
             // we need serviceRegistry to get SessionFactory;
             serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
