@@ -5,9 +5,7 @@ import com.maciej.entity.ProteinData;
 import com.maciej.entity.User;
 import com.maciej.entity.UserHistory;
 import net.sf.ehcache.hibernate.EhCache;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
+import org.hibernate.*;
 
 import java.util.Date;
 import java.util.List;
@@ -32,16 +30,33 @@ public class Application {
 //        		"from User user");
 
         // CRITERIA QUERY
-        Criteria criteria = session.createCriteria(User.class);
-
-        List<User> users = criteria.list();
-        for (User user : users) {
-            System.out.println(user.getName());
-        }
+//       Criteria criteria = session.createCriteria(User.class);
+//        List<User> users = criteria.list();
+//        for (User user : users) {
+//            System.out.println(user.getName());
+//        }
 
         // BATCH PROCESSING WITH HQL (BATCH UPDATE)
-        Query query = session.createQuery("update ProteinData pd set pd.total = 0");
-        query.executeUpdate();
+//        Query query = session.createQuery("update ProteinData pd set pd.total = 0");
+//        query.executeUpdate();
+
+        // MANUAL BATCHING
+        Criteria criteria = session.createCriteria(User.class);
+
+        // We are using a cursor in the database; we get data when from database when we ask for as opposed to getting big data at once.
+        // When we have a lot of Users, we may not have enough memory to load them at once;
+        ScrollableResults users = criteria.setCacheMode(CacheMode.IGNORE).scroll(); // not using 2nd-ary cache
+        int count = 0;
+        while (users.next()){
+            User user = (User) users.get(0);
+            user.setProteinData(new ProteinData());
+            session.save(user);
+            if (++count % 2 == 0){
+                session.flush();
+                session.clear();
+            }
+            System.out.println(user.getName());
+        }
 
         session.getTransaction().commit();
         session.close();
