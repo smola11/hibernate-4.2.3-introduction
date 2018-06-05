@@ -59,11 +59,11 @@ public class Application {
 //        }
 
         // NATIVE QUERY
-//        Query query = session.createSQLQuery("SELECT * FROM Users").addEntity(User.class);
-//        List<User> users = query.list();
-//        for (User user : users) {
-//            System.out.println(user.getName());
-//        }
+        Query query = session.createSQLQuery("SELECT * FROM User").addEntity(User.class);
+        List<User> users = query.list();
+        for (User user : users) {
+            System.out.println(user.getName());
+        }
 
         session.getTransaction().commit();
         session.close();
