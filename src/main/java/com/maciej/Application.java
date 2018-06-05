@@ -41,22 +41,29 @@ public class Application {
 //        query.executeUpdate();
 
         // MANUAL BATCHING
-        Criteria criteria = session.createCriteria(User.class);
+//        Criteria criteria = session.createCriteria(User.class);
 
         // We are using a cursor in the database; we get data when from database when we ask for as opposed to getting big data at once.
         // When we have a lot of Users, we may not have enough memory to load them at once;
-        ScrollableResults users = criteria.setCacheMode(CacheMode.IGNORE).scroll(); // not using 2nd-ary cache
-        int count = 0;
-        while (users.next()){
-            User user = (User) users.get(0);
-            user.setProteinData(new ProteinData());
-            session.save(user);
-            if (++count % 2 == 0){
-                session.flush();
-                session.clear();
-            }
-            System.out.println(user.getName());
-        }
+//        ScrollableResults users = criteria.setCacheMode(CacheMode.IGNORE).scroll(); // not using 2nd-ary cache
+//        int count = 0;
+//        while (users.next()){
+//            User user = (User) users.get(0);
+//            user.setProteinData(new ProteinData());
+//            session.save(user);
+//            if (++count % 2 == 0){
+//                session.flush();
+//                session.clear();
+//            }
+//            System.out.println(user.getName());
+//        }
+
+        // NATIVE QUERY
+//        Query query = session.createSQLQuery("SELECT * FROM Users").addEntity(User.class);
+//        List<User> users = query.list();
+//        for (User user : users) {
+//            System.out.println(user.getName());
+//        }
 
         session.getTransaction().commit();
         session.close();
