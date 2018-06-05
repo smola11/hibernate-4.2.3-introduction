@@ -1,14 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="com.maciej.entity.GoalAlert" table="GOAL_ALERT">
         <id name="id" type="java.lang.Long">
-            <column name="ID" />
-            <generator class="increment" />
+            <column name="ID"/>
+            <generator class="increment"/>
         </id>
         <property name="message" type="java.lang.String">
-            <column name="MESSAGE" />
+            <column name="MESSAGE"/>
         </property>
     </class>
+    <query name="AllGoalAlerts">
+        <!--NamedQuery; ![CDATA] - will not be parsed by the XML parser-->
+        <![CDATA[from GoalAlert]]>
+    </query>
 </hibernate-mapping>

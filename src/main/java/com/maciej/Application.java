@@ -19,12 +19,21 @@ public class Application {
         Session session = HibernateUtilities.getSessionFactory().openSession();
         session.beginTransaction();
 
-        Query query = session.createQuery("from User");
-        List<User> users = query.list();
-        for (User user : users){
-            System.out.println(user.getName());
+        //NAMED QUERY
+        Query query =  session.getNamedQuery("AllGoalAlerts");
+
+//        // PAGING
+//        Query query = session.createQuery("from GoalAlert").setFirstResult(2).setMaxResults(1);
+        List<GoalAlert> alerts = query.list();
+        for (GoalAlert alert : alerts) {
+            System.out.println(alert.getMessage());
         }
 
+
+//        List<User> users = query.list();
+//        for (User user : users) {
+//            System.out.println(user.getName());
+//        }
         session.getTransaction().commit();
 
         HibernateUtilities.getSessionFactory().close();
