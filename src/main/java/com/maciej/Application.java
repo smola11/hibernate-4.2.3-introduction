@@ -4,15 +4,28 @@ import com.maciej.entity.GoalAlert;
 import com.maciej.entity.ProteinData;
 import com.maciej.entity.User;
 import com.maciej.entity.UserHistory;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import java.util.Date;
+import java.util.List;
 
 public class Application {
 
     public static void main(String[] args) {
 
         PopulateSampleData();
+
+        Session session = HibernateUtilities.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("from User");
+        List<User> users = query.list();
+        for (User user : users){
+            System.out.println(user.getName());
+        }
+
+        session.getTransaction().commit();
 
         HibernateUtilities.getSessionFactory().close();
     }
