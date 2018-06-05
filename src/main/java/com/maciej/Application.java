@@ -41,7 +41,6 @@ public class Application {
         session.getTransaction().commit();
 
         HibernateUtilities.getSessionFactory().close();
-        
     }
 
     private static void PopulateSampleData() {

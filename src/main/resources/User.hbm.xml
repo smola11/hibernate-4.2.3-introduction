@@ -3,6 +3,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="com.maciej.entity.User" table="USER">
+        <cache usage="read-write"/>
         <id name="id" type="java.lang.Long">
             <column name="ID"/>
             <generator class="identity"/>
@@ -18,6 +19,7 @@
         so you only need to update USER_ID once-->
         <!--cascade="save-update" - tell Hibernate every time you save User, save all the UserHistory too-->
         <list name="history" table="USER_HISTORY" inverse="true" cascade="save-update">
+            <cache usage="read-write"/>
             <!--foreign key which will be USER ID-->
             <key column="USER_ID"/>
             <list-index column="POSITION"/>
