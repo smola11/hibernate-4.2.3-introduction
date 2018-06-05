@@ -38,8 +38,13 @@ public class Application {
         for (User user : users) {
             System.out.println(user.getName());
         }
-        session.getTransaction().commit();
 
+        // BATCH PROCESSING WITH HQL (BATCH UPDATE)
+        Query query = session.createQuery("update ProteinData pd set pd.total = 0");
+        query.executeUpdate();
+
+        session.getTransaction().commit();
+        session.close();
         HibernateUtilities.getSessionFactory().close();
     }
 
