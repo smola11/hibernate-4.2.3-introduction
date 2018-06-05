@@ -4,6 +4,7 @@ import com.maciej.entity.GoalAlert;
 import com.maciej.entity.ProteinData;
 import com.maciej.entity.User;
 import com.maciej.entity.UserHistory;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -26,18 +27,16 @@ public class Application {
 //        Query query = session.createQuery("from GoalAlert").setFirstResult(2).setMaxResults(1);
 
         // DYNAMIC INSTANTIATION
-        Query query = session.createQuery("select new com.maciej.dto.UserTotal(user.name, user.proteinData.total) " +
-        		"from User user");
-        List<GoalAlert> alerts = query.list();
-        for (GoalAlert alert : alerts) {
-            System.out.println(alert.getMessage());
+//        Query query = session.createQuery("select new com.maciej.dto.UserTotal(user.name, user.proteinData.total) " +
+//        		"from User user");
+
+        // CRITERIA QUERY
+        Criteria criteria = session.createCriteria(User.class);
+
+        List<User> users = criteria.list();
+        for (User user : users) {
+            System.out.println(user.getName());
         }
-
-
-//        List<User> users = query.list();
-//        for (User user : users) {
-//            System.out.println(user.getName());
-//        }
         session.getTransaction().commit();
 
         HibernateUtilities.getSessionFactory().close();
